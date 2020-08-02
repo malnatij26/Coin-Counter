@@ -1,12 +1,12 @@
 coins = imresize(imread("photos/good_coin.jpg"),1);
-figure; subplot(1,3,1); imshow(coins); title('Original');
-bwCoins = im2double(rgb2gray(coins));
-subplot(1,3,2); imshow(bwCoins); title('Grayscale image');
-
+figure; subplot(1,2,1); imshow(coins); title('Original');
+% bwCoins = im2double(rgb2gray(coins));
+% subplot(1,2,2); imshow(bwCoins); title('Grayscale image');
+% 
 %Find each coin in image using imfindcircles
 [centers, radii, metric] = imfindcircles(bwCoins, [100 250], 'ObjectPolarity','bright', 'Sensitivity',0.96, 'Method', 'TwoStage');
 
-subplot(1,3,3); imshow(coins);
+subplot(1,2,2); imshow(coins);
 
 %Show circles on original image
 detected = viscircles(centers, radii);
@@ -28,7 +28,7 @@ display(radii)
 dime = min(radii);
 quarter = max(radii);
 
-if dime != quarter
+if dime ~= quarter
     %pennys diamiter now kenoing the min and max.
     %1.14 is the diference in mm penny-dime
     %3.3  is the diference in mm nickel-dime
