@@ -20,3 +20,6 @@ octave-workspace
 
 # Simulink autosave extension
 .autosave
+
+test.m
+working_circles.m
