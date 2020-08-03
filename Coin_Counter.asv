@@ -72,4 +72,3 @@ function values = getValue()
     values = [dime_count, penny_count, nickel_count, quarter_count, value];
 end
 
-
