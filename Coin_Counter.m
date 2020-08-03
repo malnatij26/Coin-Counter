@@ -1,10 +1,8 @@
 coins = imresize(imread("photos/good_coin.jpg"),1);
 figure; subplot(1,2,1); imshow(coins); title('Original');
-% bwCoins = im2double(rgb2gray(coins));
-% subplot(1,2,2); imshow(bwCoins); title('Grayscale image');
-% 
+
 %Find each coin in image using imfindcircles
-[centers, radii, metric] = imfindcircles(bwCoins, [100 250], 'ObjectPolarity','bright', 'Sensitivity',0.96, 'Method', 'TwoStage');
+[centers, radii, metric] = imfindcircles(coins, [100 250], 'ObjectPolarity','bright', 'Sensitivity',0.96, 'Method', 'TwoStage');
 
 subplot(1,2,2); imshow(coins);
 
@@ -61,8 +59,8 @@ if dime ~= quarter
     display("value = " + value+ " cents");
      
 else %single coin
-
-    
+    display("single coin");
+    single_coin(coin);
     
 end
 %pause;
