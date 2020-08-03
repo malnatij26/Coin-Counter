@@ -54,5 +54,5 @@ value = (dime_count*10)+(penny_count)+ (nickle_count*5)+ (quarter_count*25)
 display("value = " + value+ " cents");
     
 
-pause;
-clc; close all; clear all;
+% pause;
+% clc; close all; clear all;
