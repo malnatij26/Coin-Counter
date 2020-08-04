@@ -1,6 +1,6 @@
 coins = imresize(imread("photos/good_coin.jpg"),1);
 figure; subplot(1,2,1); imshow(coins); title('Original');
-% bwCoins = im2double(rgb2gray(coins));
+bwCoins = im2double(rgb2gray(coins));
 % subplot(1,2,2); imshow(bwCoins); title('Grayscale image');
 % 
 %Find each coin in image using imfindcircles
@@ -22,7 +22,7 @@ if size(centers, 1) == 0
     return;
 end
 
-display(radii)
+% display(radii)
 
 
 dime = min(radii);
