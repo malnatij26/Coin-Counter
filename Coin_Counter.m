@@ -1,10 +1,12 @@
 coins = imresize(imread("photos/good_coin.jpg"),1);
 figure; subplot(1,2,1); imshow(coins); title('Original');
+
 bwCoins = im2double(rgb2gray(coins));
 % subplot(1,2,2); imshow(bwCoins); title('Grayscale image');
 % 
+
 %Find each coin in image using imfindcircles
-[centers, radii, metric] = imfindcircles(bwCoins, [100 250], 'ObjectPolarity','bright', 'Sensitivity',0.96, 'Method', 'TwoStage');
+[centers, radii, metric] = imfindcircles(coins, [140 300], 'ObjectPolarity','bright', 'Sensitivity',0.96, 'Method', 'TwoStage');
 
 subplot(1,2,2); imshow(coins);
 
@@ -12,7 +14,7 @@ subplot(1,2,2); imshow(coins);
 detected = viscircles(centers, radii);
 drawnow;
 
-title(sprintf('Number of Coins Detected: %d', size(centers,1)));
+
 
 %End early if no coins are detected
 if size(centers, 1) == 0
@@ -53,16 +55,13 @@ if dime ~= quarter
             quarter_count = quarter_count + 1;
         end
     end
-    display(dime_count)
-    display(penny_count)
-    display(nickel_count)
-    display(quarter_count)
-    value = (dime_count*10)+(penny_count)+ (nickel_count*5)+ (quarter_count*25);
-    display("value = " + value+ " cents");
+     value = (dime_count*10)+(penny_count)+ (nickel_count*5)+ (quarter_count*25);
+    title(sprintf('Number of Coins Detected: %d \n Pennies: %d \n Dimes: %d \n Nickels:%d \n Quarters:%d \n total: $ %.2f \n', size(centers,1), penny_count, dime_count, nickel_count, quarter_count, (value/100)));
+
      
 else %single coin
-
-    
+    display("single coin");
+    single_coin(coin);
     
 end
 %pause;
