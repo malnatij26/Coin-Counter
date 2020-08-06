@@ -1,4 +1,4 @@
-coins = imresize(imread("photos/good_coin.jpg"),1);
+coins = imresize(imread("photos/all_d.jpg"),.5);
 figure; subplot(1,2,1); imshow(coins); title('Original');
 
 bwCoins = im2double(rgb2gray(coins));
@@ -6,7 +6,7 @@ bwCoins = im2double(rgb2gray(coins));
 % 
 
 %Find each coin in image using imfindcircles
-[centers, radii, metric] = imfindcircles(coins, [140 300], 'ObjectPolarity','bright', 'Sensitivity',0.96, 'Method', 'TwoStage');
+[centers, radii, metric] = imfindcircles(coins, [150 170], 'ObjectPolarity','bright', 'Sensitivity',0.96, 'Method', 'TwoStage');
 
 subplot(1,2,2); imshow(coins);
 
