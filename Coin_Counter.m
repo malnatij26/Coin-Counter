@@ -60,7 +60,7 @@ if dime ~= quarter
         end
     end
      value = (dime_count*10)+(penny_count)+ (nickel_count*5)+ (quarter_count*25);
-    title(sprintf('Number of Coins Detected: %d \n Pennies: %d \n Dimes: %d \n Nickels:%d \n Quarters:%d \n total: $ %.2f \n Penny color count: \n', size(centers,1), penny_count, dime_count, nickel_count, quarter_count, (value/100), penny_color));
+    title(sprintf('Number of Coins Detected: %d \n Pennies: %d \n Dimes: %d \n Nickels:%d \n Quarters:%d \n total: $ %.2f \n Penny color count: %d \n', size(centers,1), penny_count, dime_count, nickel_count, quarter_count, (value/100), penny_color));
 
      
 else %single coin
