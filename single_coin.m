@@ -138,6 +138,130 @@ end
 
 end
 
+
+function isPenny = isPennyColor(image, center, radius, threshold)
+cmp = get_penny_color();
+pennies = image;
+isCoin = 0;
+    for x=1: radius
+        if int16(center(2)) < (1512-min(radii))  && int16(center(1)) < (1512-min(radii))
+            RGB =  pennies( int16(center(1)), int16(center(2)), : );
+            for r = 1 : size(cmp)
+                if cmp(r) == RGB(1)
+                    if RGB(2)== cmp(r,2)
+                        if RGB(3) == cmp(r,3)
+                            isCoin = isCoin +1;
+                        end
+                    end
+                    
+                end
+            end
+            
+            RGB =  pennies( int16center(1))+x, int16(center(2)), : );
+            for r = 1 : size(cmp)
+                if cmp(r) == RGB(1)
+                    if RGB(2)== cmp(r,2)
+                        if RGB(3) == cmp(r,3)
+                            isCoin = isCoin +1;
+                        end
+                    end
+                    
+                end
+            end
+            
+            RGB =  pennies( int16(center(1)), int16(center(2))+x, : );
+            for r = 1 : size(cmp)
+                if cmp(r) == RGB(1)
+                    if RGB(2)== cmp(r,2)
+                        if RGB(3) == cmp(r,3)
+                            isCoin = isCoin +1;
+                        end
+                    end
+                    
+                end
+            end
+            
+            RGB =  pennies( int16(center(1))+x, int16(center(2))+x, : );
+            for r = 1 : size(cmp)
+                if cmp(r) == RGB(1)
+                    if RGB(2)== cmp(r,2)
+                        if RGB(3) == cmp(r,3)
+                            isCoin = isCoin +1;
+                        end
+                    end
+                    
+                end
+            end
+            
+            RGB =  pennies( int16(center(1))-x, int16(center(2)), : );
+            for r = 1 : size(cmp)
+                if cmp(r) == RGB(1)
+                    if RGB(2)== cmp(r,2)
+                        if RGB(3) == cmp(r,3)
+                            isCoin = isCoin +1;
+                        end
+                    end
+                    
+                end
+            end
+            
+            RGB =  pennies( int16(center(1)), int16(center(2))-x, : );
+            for r = 1 : size(cmp)
+                if cmp(r) == RGB(1)
+                    if RGB(3) == cmp(r,3)
+                        isCoin = isCoin +1;
+                    end
+                end
+                
+            end
+            
+            
+            RGB =  pennies( int16(center(1))-x, int16(center(2))-x, : );
+            for r = 1 : size(cmp)
+                if cmp(r) == RGB(1)
+                    if RGB(2)== cmp(r,2)
+                        if RGB(3) == cmp(r,3)
+                            isCoin = isCoin +1;
+                        end
+                    end
+                    
+                end
+            end
+            
+            RGB =  pennies( int16(center(1))+x, int16(center(2))-x, : );
+            for r = 1 : size(cmp)
+                if cmp(r) == RGB(1)
+                    if RGB(2)== cmp(r,2)
+                        if RGB(3) == cmp(r,3)
+                            isCoin = isCoin +1;
+                        end
+                    end
+                    
+                end
+            end
+            
+            RGB =  pennies( int16(center(1))-x, int16(center(2))+x, : );
+            for r = 1 : size(cmp)
+                if cmp(r) == RGB(1)
+                    if RGB(2)== cmp(r,2)
+                        if RGB(3) == cmp(r,3)
+                            isCoin = isCoin +1;
+                        end
+                    end
+                    
+                end
+            end
+            
+        end
+        
+    end
+    if isCoin >= threshold
+        isPenny = 1
+    else
+        isPenny = 0
+    end
+end
+
 function  match_penny_color()
 
 
@@ -268,9 +392,9 @@ for i = 1 : size(centers, 1)
         
     end
     if isCoin >= 150
-%         disp(isCoin)
-%         disp("penny found: ")
-%         disp(centers(i,:))
+        disp("penny found: ")
+        disp(centers(i,:))
+        disp(isCoin)
         num_found = num_found +1;
     end 
 end
