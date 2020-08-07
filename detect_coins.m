@@ -24,8 +24,11 @@ function [imgResize, centers, radii] = detect_coins(origPic)
     
 
     %Show circles on original image
-    imshow(imgResize);
+    imgTmp = imshow(imgResize);
     detected = viscircles(centers, radii);
     drawnow;
+    
+    saveas(imgTmp, 'detected_coins_tmp.jpg');
+    close;
  
 end
