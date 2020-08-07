@@ -16,7 +16,7 @@ function single_coin()
 % detected = viscircles(centers, radii);
 % drawnow;
 
-get_penny_color()
+match_penny_color()
 
 end
 
@@ -76,12 +76,87 @@ function penny_color = get_penny_color()
 
 pennies = imresize(imread("photos/all_p.jpg"),0.5);
 [centers, radii, metric] = imfindcircles(pennies,  [100 175], 'ObjectPolarity','bright', 'Sensitivity',0.96, 'Method', 'TwoStage');
-disp(centers)
+% disp(centers)
 cmp = colormap(copper);
+p = min(radii)*size(centers,1);
+penny_color = zeros(p,3);
+p = 1;
+for x=1: min(radii)
+for i = 1 : size(centers, 1)
+   if int16(centers(i,2)) < 1500 && int16(centers(i,1)) < 1500
+       
+   RGB =  pennies( int16(centers(i,1)), int16(centers(i,2)), : );
+   penny_color(p,1)= RGB(1);
+   penny_color(p,2) = RGB(2);
+   penny_color(p,3)  = RGB(3);
+   p = p+1;
+   
+   RGB =  pennies( int16(centers(i,1))+x, int16(centers(i,2)), : );
+  penny_color(p,1)= RGB(1);
+  penny_color(p,2) = RGB(2);
+  penny_color(p,3)  = RGB(3);
+   p = p+1;
+   RGB =  pennies( int16(centers(i,1)), int16(centers(i,2))+x, : );
+     penny_color(p,1)= RGB(1);
+     penny_color(p,2) = RGB(2);
+     penny_color(p,3)  = RGB(3);
+   p = p+1;
+   RGB =  pennies( int16(centers(i,1))+x, int16(centers(i,2))+x, : );
+     penny_color(p,1)= RGB(1) ;
+     penny_color(p,2) = RGB(2) ;
+     penny_color(p,3)  = RGB(3);
+   p = p+1;
+   RGB =  pennies( int16(centers(i,1))-x, int16(centers(i,2)), : );
+     penny_color(p,1)= RGB(1);
+     penny_color(p,2) = RGB(2);
+     penny_color(p,3)  = RGB(3);
+   p = p+1;
+   RGB =  pennies( int16(centers(i,1)), int16(centers(i,2))-x, : );
+     penny_color(p,1)= RGB(1);
+     penny_color(p,2) = RGB(2);
+     penny_color(p,3)  = RGB(3);
+   p = p+1;
+   RGB =  pennies( int16(centers(i,1))-x, int16(centers(i,2))-x, : );
+     penny_color(p,1)= RGB(1);
+     penny_color(p,2) = RGB(2) ;
+     penny_color(p,3)  = RGB(3);
+   p = p+1;
+   RGB =  pennies( int16(centers(i,1))+x, int16(centers(i,2))-x, : );
+   penny_color(p,1)= RGB(1);
+   penny_color(p,2) = RGB(2) ;
+   penny_color(p,3)  = RGB(3);
+   p = p+1;
+   RGB =  pennies( int16(centers(i,1))-x, int16(centers(i,2))+x, : );
+%    penny_color = [penny_color, generateRGB(RGB)]
+    penny_color(p,1)= RGB(1) ;
+    penny_color(p,2) = RGB(2) ;
+    penny_color(p,3)  = RGB(3);
+   p = p+1;
+   end
+end
+   
+end
+
+
+end
+
+function  match_penny_color()
+
+
+pennies = imresize(imread("photos/good_coin.jpg"),0.5);
+[centers, radii, metric] = imfindcircles(pennies,  [70 175], 'ObjectPolarity','bright', 'Sensitivity',0.96, 'Method', 'TwoStage');
+
+imshow(pennies);
+%Show circles on original image
+detected = viscircles(centers, radii);
+drawnow;
+%disp(centers)
+cmp = get_penny_color();
 
 
 for x=1: min(radii)
 for i = 1 : size(centers, 1)
+   if int16(centers(i,2)) < 1300 && int16(centers(i,1)) < 1300
    RGB =  pennies( int16(centers(i,1)), int16(centers(i,2)), : );
    for r = 1 : size(cmp)
         if cmp(r)*255 == RGB(1)          
@@ -238,6 +313,6 @@ for i = 1 : size(centers, 1)
 end
    
 end
-
+end
 
 end
