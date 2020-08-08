@@ -17,7 +17,7 @@ function [imgResize, centers, radii] = detect_coins(origPic)
     
     %find circles
     % , metric (below var)
-    [centers, radii] = imfindcircles(imgFiltered, [70 90], 'ObjectPolarity','bright', 'Sensitivity',0.96, 'Method', 'TwoStage');
+    [centers, radii] = imfindcircles(imgFiltered, [30 90], 'ObjectPolarity','bright', 'Sensitivity',0.96, 'Method', 'TwoStage');
 
 %     circles = viscircles(centers, radii);
 
@@ -29,6 +29,6 @@ function [imgResize, centers, radii] = detect_coins(origPic)
     drawnow;
     
     saveas(imgTmp, 'detected_coins_tmp.jpg');
-    close;
+%     close;
  
 end

@@ -1,6 +1,6 @@
 %function single_coin(picture)
 
-function single_coin()
+function single_coin(coins)
 % %edgeThreshold = 0.2;
 % %amount = 0.9;
 % coins = imresize(imread("photos/all_p.jpg"),.5);
@@ -16,7 +16,7 @@ function single_coin()
 % detected = viscircles(centers, radii);
 % drawnow;
 
-match_penny_color()
+match_penny_color(coins)
 
 end
 
@@ -157,7 +157,7 @@ isCoin = 0;
                 end
             end
             
-            RGB =  pennies( int16center(1))+x, int16(center(2)), : );
+%             RGB =  pennies( int16center(1))+x, int16(center(2)), : );
             for r = 1 : size(cmp)
                 if cmp(r) == RGB(1)
                     if RGB(2)== cmp(r,2)
@@ -262,26 +262,27 @@ isCoin = 0;
     end
 end
 
-function  match_penny_color()
+function  match_penny_color(coins)
 
 
-pennies = imresize(imread("photos/good_coin.jpg"),0.5);
-[centers, radii, metric] = imfindcircles(pennies,  [70 175], 'ObjectPolarity','bright', 'Sensitivity',0.96, 'Method', 'TwoStage');
+% pennies = imresize(imread("photos/good_coin.jpg"),0.5);
+[centers, radii, metric] = imfindcircles(coins,  [30 90], 'ObjectPolarity','bright', 'Sensitivity',0.96, 'Method', 'TwoStage');
 
-imshow(pennies);
+% imshow(coins);
 %Show circles on original image
 detected = viscircles(centers, radii);
-drawnow;
+% drawnow;
 %disp(centers)
 cmp = get_penny_color();
 
 num_found = 0;
+[rows, columns, numberOfColorChannels] = size(coins);
 
 for i = 1 : size(centers, 1)
     isCoin = 0;
     for x=1: min(radii)
-        if int16(centers(i,2)) < (1512-min(radii))  && int16(centers(i,1)) < (1512-min(radii))
-            RGB =  pennies( int16(centers(i,1)), int16(centers(i,2)), : );
+        if int16(centers(i,2)) < (rows-min(radii))  && int16(centers(i,1)) < (columns-min(radii))
+            RGB =  coins( int16(centers(i,1)), int16(centers(i,2)), : );
             for r = 1 : size(cmp)
                 if cmp(r) == RGB(1)
                     if RGB(2)== cmp(r,2)
@@ -293,7 +294,7 @@ for i = 1 : size(centers, 1)
                 end
             end
             
-            RGB =  pennies( int16(centers(i,1))+x, int16(centers(i,2)), : );
+            RGB =  coins( int16(centers(i,1))+x, int16(centers(i,2)), : );
             for r = 1 : size(cmp)
                 if cmp(r) == RGB(1)
                     if RGB(2)== cmp(r,2)
@@ -305,7 +306,7 @@ for i = 1 : size(centers, 1)
                 end
             end
             
-            RGB =  pennies( int16(centers(i,1)), int16(centers(i,2))+x, : );
+            RGB =  coins( int16(centers(i,1)), int16(centers(i,2))+x, : );
             for r = 1 : size(cmp)
                 if cmp(r) == RGB(1)
                     if RGB(2)== cmp(r,2)
@@ -317,7 +318,7 @@ for i = 1 : size(centers, 1)
                 end
             end
             
-            RGB =  pennies( int16(centers(i,1))+x, int16(centers(i,2))+x, : );
+            RGB =  coins( int16(centers(i,1))+x, int16(centers(i,2))+x, : );
             for r = 1 : size(cmp)
                 if cmp(r) == RGB(1)
                     if RGB(2)== cmp(r,2)
@@ -329,7 +330,7 @@ for i = 1 : size(centers, 1)
                 end
             end
             
-            RGB =  pennies( int16(centers(i,1))-x, int16(centers(i,2)), : );
+            RGB =  coins( int16(centers(i,1))-x, int16(centers(i,2)), : );
             for r = 1 : size(cmp)
                 if cmp(r) == RGB(1)
                     if RGB(2)== cmp(r,2)
@@ -341,7 +342,7 @@ for i = 1 : size(centers, 1)
                 end
             end
             
-            RGB =  pennies( int16(centers(i,1)), int16(centers(i,2))-x, : );
+            RGB =  coins( int16(centers(i,1)), int16(centers(i,2))-x, : );
             for r = 1 : size(cmp)
                 if cmp(r) == RGB(1)
                     if RGB(3) == cmp(r,3)
@@ -352,7 +353,7 @@ for i = 1 : size(centers, 1)
             end
             
             
-            RGB =  pennies( int16(centers(i,1))-x, int16(centers(i,2))-x, : );
+            RGB =  coins( int16(centers(i,1))-x, int16(centers(i,2))-x, : );
             for r = 1 : size(cmp)
                 if cmp(r) == RGB(1)
                     if RGB(2)== cmp(r,2)
@@ -364,7 +365,7 @@ for i = 1 : size(centers, 1)
                 end
             end
             
-            RGB =  pennies( int16(centers(i,1))+x, int16(centers(i,2))-x, : );
+            RGB =  coins( int16(centers(i,1))+x, int16(centers(i,2))-x, : );
             for r = 1 : size(cmp)
                 if cmp(r) == RGB(1)
                     if RGB(2)== cmp(r,2)
@@ -376,7 +377,7 @@ for i = 1 : size(centers, 1)
                 end
             end
             
-            RGB =  pennies( int16(centers(i,1))-x, int16(centers(i,2))+x, : );
+            RGB =  coins( int16(centers(i,1))-x, int16(centers(i,2))+x, : );
             for r = 1 : size(cmp)
                 if cmp(r) == RGB(1)
                     if RGB(2)== cmp(r,2)

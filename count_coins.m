@@ -1,9 +1,8 @@
 function [dime_count,penny_count,nickel_count,quarter_count,value] = count_coins(radii)
-
 dime = min(radii);
 quarter = max(radii);
 
-if dime ~= quarter
+if (quarter - dime) >= 5
     %pennys diamiter now kenoing the min and max.
     %1.14 is the diference in mm penny-dime
     %3.3  is the diference in mm nickel-dime
@@ -36,7 +35,6 @@ if dime ~= quarter
 %     display("value = " + value+ " cents");
      
 else %single coin
-
     
     
 end
